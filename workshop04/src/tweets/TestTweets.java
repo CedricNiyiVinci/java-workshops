@@ -2,7 +2,9 @@ package tweets;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestTweets {
 
@@ -26,8 +28,8 @@ public class TestTweets {
             new Tweet("Donde esta mi navo?", LocalDateTime.of(2021, 9, 20, 7, 22), jorge, 461)
         );
 
-        tweetsABruxelles();
-//        tweetsEnSeptembre2021Chronologique();
+//        tweetsABruxelles();
+        tweetsEnSeptembre2021Chronologique();
 //        retweet2000Plus();
 //        tweetsUtilisateurBruxellesParRetweet();
 //        textesOrdreAlphabetique();
@@ -42,7 +44,7 @@ public class TestTweets {
      */
     private static void tweetsABruxelles() {
         //TODO: filtrer les tweet selon la localisation de l'auteur
-        List<Tweet> listeDeTweet = tweets.stream().filter(tweet -> tweet.getAuthor().getLocation().equals("Bruxelles")).toList();
+        List<Tweet> listeDeTweet = tweets.stream().filter(tweet -> tweet.getAuthor().getLocation().equals("Bruxelles")).collect(Collectors.toList());
         System.out.println(listeDeTweet);
     }
 
@@ -51,6 +53,10 @@ public class TestTweets {
      */
     private static void tweetsEnSeptembre2021Chronologique() {
         //TODO: filtrer les tweets selon le mois de la date, puis les trier
+        List<Tweet> listeDeTweet = tweets.stream().filter(tweet -> tweet.getPublicationDate().getMonthValue()==9
+                                                        && tweet.getPublicationDate().getYear()==2021)
+                                    .sorted(Comparator.comparing(Tweet::getPublicationDate)).collect(Collectors.toList());
+        System.out.println(listeDeTweet);
     }
 
     /**

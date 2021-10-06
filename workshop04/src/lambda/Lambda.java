@@ -41,10 +41,10 @@ public class Lambda {
     }
 
     public static <E> List<E> filter(List<E> list, Predicate<E> match){
-        return list.stream().filter(match).toList() ;//collect(Collectors.toList());
+        return list.stream().filter(match).collect(Collectors.toList()); //collect(Collectors.toList());
     }
 
     public static <E, T> List<T> map (List<E> list, Function<E, T> transform) {
-        return list.stream().map(transform).toList();
+        return list.stream().map(transform).collect(Collectors.toList());
     }
 }
