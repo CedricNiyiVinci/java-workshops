@@ -13,13 +13,13 @@ public class TestStreamDeNombres {
         doubles = new Random().doubles(10,0,100).toArray();
 
         System.out.println("1. Moyenne des racines carrée = "  + moyenneDesRacinesCarrees());
-        System.out.println("\n2. Génération de streams infinis de doubles");
+        /*System.out.println("\n2. Génération de streams infinis de doubles");
         listeDe10PuisTabDe20DoubleStream();
         listeDe10PuisTabDe20StreamDouble();
         System.out.println("\n3. 20 nombres entiers pairs entre 0 et 100");
         System.out.println(
                 //TODO: générer le stream ici (faites d'abord les points 1. et 2.)
-        );
+        );*/
 
     }
 
@@ -28,7 +28,7 @@ public class TestStreamDeNombres {
      */
     private static double moyenneDesRacinesCarrees() {
         //TODO: utilisez DoubleStream.of(double... values)
-        return 0.0;
+        return DoubleStream.of(doubles).reduce(0.0, (a,b) -> Math.sqrt(a + b))/doubles.length;
     }
 
     /**
