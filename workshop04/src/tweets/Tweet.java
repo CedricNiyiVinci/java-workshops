@@ -1,6 +1,8 @@
 package tweets;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Tweet {
 
@@ -17,7 +19,7 @@ public class Tweet {
     }
 
     public String getText() {
-        return text;
+        return text + "\n";
     }
 
     public LocalDateTime getPublicationDate() {
@@ -34,9 +36,10 @@ public class Tweet {
 
     @Override
     public String toString() {
-        return "Tweet" +
+        DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm:ss");
+        return "\n\nTweet" +
                 "\ntext='" + text + '\'' +
-                "\npublicationDate=" + publicationDate +
+                "\npublicationDate : " + dateTimeFormatter1.format(publicationDate) +
                 "\nuser=" + author +
                 "\nretweets=" + retweets;
     }

@@ -28,14 +28,14 @@ public class TestTweets {
             new Tweet("Donde esta mi navo?", LocalDateTime.of(2021, 9, 20, 7, 22), jorge, 461)
         );
 
-//        tweetsABruxelles();
+        tweetsABruxelles();
         tweetsEnSeptembre2021Chronologique();
-//        retweet2000Plus();
-//        tweetsUtilisateurBruxellesParRetweet();
-//        textesOrdreAlphabetique();
-//        tagsOrdreAlphabetique();
-//        tweetLePlusRetweete();
-//        nombreTweetsPlusQue100Retweets();
+        retweet2000Plus();
+        tweetsUtilisateurBruxellesParRetweet();
+        textesOrdreAlphabetique();
+        tagsOrdreAlphabetique();
+        tweetLePlusRetweete();
+        nombreTweetsPlusQue100Retweets();
     }
 
 
@@ -64,6 +64,8 @@ public class TestTweets {
      */
     private static void retweet2000Plus() {
         //TODO : utiliser l'api stream pour vérifier si au moins un élément vérifie la condition
+        boolean unTweetRetweet2000 = tweets.stream().filter(tweet -> tweet.getRetweets()>=2000).findAny().isPresent();
+        System.out.println(unTweetRetweet2000);
     }
 
     /**
@@ -72,6 +74,9 @@ public class TestTweets {
      */
     private static void tweetsUtilisateurBruxellesParRetweet() {
         //TODO: filtrer les tweets selon la localisation de l'auteur, puis les trier
+        List<Tweet> listeDeTweet = tweets.stream().filter(tweet -> tweet.getAuthor().getLocation().equals("Bruxelles")).
+                                            sorted(Comparator.comparing(Tweet::getRetweets)).collect(Collectors.toList());
+        System.out.println(listeDeTweet);
     }
 
     /**
@@ -79,6 +84,8 @@ public class TestTweets {
      */
     private static void textesOrdreAlphabetique(){
         //TODO: mapper le stream de Tweet vers un stream de String, puis trier
+        List<String> listeTexteTweet = tweets.stream().map(Tweet::getText).sorted().collect(Collectors.toList());
+        System.out.println(listeTexteTweet);
     }
 
     /**
@@ -86,6 +93,8 @@ public class TestTweets {
      */
     private static void tweetLePlusRetweete() {
         //TODO: s'aider de p.13-14 : "Réduire"
+        String textTweetLePlusRetwette = tweets.stream().max(Comparator.comparing(Tweet::getRetweets)).get().getText();
+        System.out.println(textTweetLePlusRetwette);
     }
 
     /**
@@ -96,6 +105,15 @@ public class TestTweets {
     private static void tagsOrdreAlphabetique() {
         //TODO: Pour l'unicité des tag, voir p.10 : "Filtrer et réduire un stream"
         //      Pour transformer en une seule String, voir p.15-16 : "Réduire et résumer"
+
+        // 1 .
+        String tousLesTags = tweets.stream().map(tweet -> tweet.getAuthor().getTag()).distinct().sorted().collect(Collectors.joining(", "));
+        System.out.println(tousLesTags);
+
+        // 2.
+        String tousLesTagsSansAt = tweets.stream().map(tweet -> tweet.getAuthor().getTag().substring(1)).distinct().sorted().collect(Collectors.joining(", "));
+        System.out.println(tousLesTagsSansAt);
+
     }
 
     /**
@@ -103,6 +121,8 @@ public class TestTweets {
      */
     private static void nombreTweetsPlusQue100Retweets() {
         //TODO: filtrer par retweets puis collecter et compter en s'aidant de p.15 : "Réduire et résumer"
+        int nombreDeTweet = (int)tweets.stream().filter(tweet -> tweet.getRetweets()>100).count();
+        System.out.println(nombreDeTweet);
     }
 
 
