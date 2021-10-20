@@ -41,6 +41,24 @@ class PrixTest {
     @DisplayName("Test du getter typeDePromo")
     @Test
     void getTypePromo() {
+        assertAll(
+                // Verification valeurPromo=0, lors de l'initialisation sd'un prix a l'aide d'un constructeur
+                // sans parametre (Cas de notre attribut prixAucune)
+                () -> assertEquals(0,prixAucune.getValeurPromo()),
+                // Vérifier que la valeur de la promo correspond bien à celle passée en paramètre du constructeur.
+                    //cas Prix Pub
+                () -> assertEquals(20, prixPub.getValeurPromo()),
+                    //cas Solde
+                () -> assertEquals(25, prixSolde.getValeurPromo()),
+                // Vérifier que le type de la promo est null lors de l’instanciation d’un prix au moyen du
+                //constructeur sans paramètre
+                () -> assertNull(prixAucune.getTypePromo()),
+                // Vérifier que le type de la promo correspond bien à celle passée en paramètre du constructeu
+                    //cas prixPub
+                () -> assertSame(Promo.PUB, prixPub.getTypePromo()),
+                    //cas prixSolde
+                () -> assertSame(Promo.SOLDE, prixSolde.getTypePromo())
+        );
     }
 
     @DisplayName("Test du getter qui renvoie la valeur de la promo")
