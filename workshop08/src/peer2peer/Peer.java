@@ -13,6 +13,7 @@ public class Peer {
     }
 
     //TODO: modifier cette méthode pour éviter le deadlock.
+    // supression du sychronize
     public void connecter(Peer peer) {
 
         synchronized (this) {
