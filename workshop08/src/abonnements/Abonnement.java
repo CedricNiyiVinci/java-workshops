@@ -14,13 +14,23 @@ public class Abonnement extends Thread {
 
     @Override
     public void run() {
-        while(compte.getSolde() >= prixMensuel) {
-            compte.depenser(new Depense(prixMensuel, "domiciliation pour " + nom));
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        boolean retraitPossible=true;
+
+
+        while(retraitPossible) {
+            synchronized (compte) {
+                if (!(compte.getSolde() >= prixMensuel))
+                    retraitPossible = false;
+                if (retraitPossible)
+                    compte.depenser(new Depense(prixMensuel, "domiciliation pour " + nom));
             }
-        }
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
     }
 }
