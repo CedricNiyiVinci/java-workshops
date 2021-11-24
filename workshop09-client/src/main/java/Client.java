@@ -33,6 +33,8 @@ import java.io.*;
 import java.net.*;
 
 public class Client {
+
+    // faire une constance PRIVATE STATICE FINAL
     public static void main(String[] args) throws IOException {
 
         //!!! Load des arguments a partir d'un fichier properties
