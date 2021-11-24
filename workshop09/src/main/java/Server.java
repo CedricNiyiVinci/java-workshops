@@ -51,8 +51,9 @@ public class Server {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(clientSocket.getInputStream()));
         ) {
-            String inputLine;
+            String inputLine; // Socket en entré, in = socket [[BufferedReader]]
             while ((inputLine = in.readLine()) != null) {
+                System.out.println("Message from anonymous client : "+ inputLine +"\n");
                 out.println(inputLine);
             }
         } catch (IOException e) {
