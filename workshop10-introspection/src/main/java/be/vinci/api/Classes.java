@@ -1,5 +1,5 @@
 package be.vinci.api;
-
+// Import au moment de la compilation va se faire
 import be.vinci.services.ClassAnalyzer;
 import be.vinci.classes.User;
 import jakarta.json.JsonStructure;
@@ -16,7 +16,13 @@ public class Classes {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public JsonStructure getClassInfo(@QueryParam("classname") String classname) {
-        ClassAnalyzer analyzer = new ClassAnalyzer(User.class);
+        ClassAnalyzer analyzer = null;
+        try {
+            //Recherche au moment de l'execution, il faut oublier la notion de directory
+            analyzer = new ClassAnalyzer(Class.forName("be.vinci.classes." + classname));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return analyzer.getFullInfo();
     }
 }
