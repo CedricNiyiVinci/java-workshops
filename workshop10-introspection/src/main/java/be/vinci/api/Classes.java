@@ -18,7 +18,7 @@ public class Classes {
     public JsonStructure getClassInfo(@QueryParam("classname") String classname) {
         ClassAnalyzer analyzer = null;
         try {
-            //Recherche au moment de l'execution, il faut oublier la notion de directory
+            //Recherche au moment de l'execution, il faut oublier la notion de directory>
             analyzer = new ClassAnalyzer(Class.forName("be.vinci.classes." + classname));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
