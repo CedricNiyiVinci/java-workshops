@@ -1,14 +1,11 @@
 package domain;
 
-public class Query {
+public interface Query {
 
-    private String urlRequete;
-    private QueryMethod typeQuery;
 
-    public Query(String urlRequete, QueryMethod typeQuery) {
-        this.urlRequete = urlRequete;
-        this.typeQuery = typeQuery;
-    }
+    QueryMethod getTypeQuery();
+
+    String getUrlRequete();
 
     public enum QueryMethod{
 
@@ -16,11 +13,4 @@ public class Query {
 
     }
 
-    public String getUrlRequete() {
-        return urlRequete;
-    }
-
-    public QueryMethod getTypeQuery() {
-        return typeQuery;
-    }
 }
