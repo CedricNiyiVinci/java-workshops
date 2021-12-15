@@ -3,6 +3,8 @@ package marathon;
 import java.time.Duration;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import marathon.Marathon.CheckPoint;
 
@@ -10,6 +12,7 @@ public class Coureur implements Comparable<Coureur>{
 	private String dossard; //Un coureur a un dossard
 	private String nom;
 	private String prenom;
+	private SortedMap<Marathon.CheckPoint, Duration> tempsMarathon = new TreeMap<Marathon.CheckPoint, Duration>();
 
 	public Coureur(String dossard, String nom, String prenom) {
 		super();
@@ -53,6 +56,8 @@ public class Coureur implements Comparable<Coureur>{
 	 * attributs.
 	 */
 	public boolean ajouterCheck(CheckPoint checkPoint, Duration duration) {
+		if(tempsMarathon.containsKey(checkPoint)) return false;
+		tempsMarathon.put(checkPoint, duration);
 		return true;
 	}
 

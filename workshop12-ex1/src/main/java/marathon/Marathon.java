@@ -37,7 +37,7 @@ public class Marathon implements Iterable<Coureur> {
 	/*
 	 * Checkpoint doit devenir un énuméré comme expliqué dans l'énoncé.
 	 */
-	enum CheckPoint {
+	public enum CheckPoint {
 		CHECK0(0), CHECK1(10), CHECK2(20), CHECK3(30), CHECK4(40),
 		CHECK5(42.195);
 
@@ -68,6 +68,9 @@ public class Marathon implements Iterable<Coureur> {
 	 * renvoie false.
 	 */
 	public boolean ajouterCheck(String dossard, CheckPoint checkPoint, Duration duration) {
+		Coureur c = listeDeParticipant.stream().filter(coureur -> coureur.getDossard().equals(dossard)).findAny().orElse(null);
+		if(c== null) return false;
+		c.ajouterCheck(checkPoint,duration);
 		return true;
 	}
 
